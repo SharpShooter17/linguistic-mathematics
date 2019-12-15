@@ -3,7 +3,7 @@ package com.ujazdowski.linguisticmathematics
 import com.github.tototoshi.csv.CSVReader
 
 import scala.collection.mutable.ListBuffer
-import scala.io.{Source, StdIn}
+import scala.io.Source
 
 object Main extends App {
 
@@ -14,20 +14,19 @@ object Main extends App {
   private val transitionHistory = new ListBuffer[State]()
   private var currentState: State = _
 
-  startFSM()
-  showHistory()
+  private val data = loadFile("data.txt").head.head.split("#")
+  data.foreach { input =>
+    println(input)
+    startFSM(input)
+    showHistory()
+  }
 
-  private def startFSM(): Unit = {
+  private def startFSM(input: String): Unit = {
     setState(findState(initialState))
 
-    while (true) {
+    input.foreach { token =>
+      setState(findNextState(token.toString))
       println(s"${currentState.name}: ${currentState.description}. ${currentState.action}")
-      if (hasTransitions) {
-        val token = StdIn.readLine().toUpperCase
-        setState(findNextState(token))
-      } else {
-        return
-      }
     }
   }
 
