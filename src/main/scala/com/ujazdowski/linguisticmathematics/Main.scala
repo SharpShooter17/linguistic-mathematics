@@ -19,6 +19,7 @@ object Main extends App {
     println(input)
     startFSM(input)
     showHistory()
+    transitionHistory.clear()
   }
 
   private def startFSM(input: String): Unit = {
