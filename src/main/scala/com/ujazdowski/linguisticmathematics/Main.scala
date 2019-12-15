@@ -15,6 +15,7 @@ object Main extends App {
   private var currentState: State = _
 
   startFSM()
+  showHistory()
 
   private def startFSM(): Unit = {
     setState(findState(initialState))
@@ -28,6 +29,12 @@ object Main extends App {
         return
       }
     }
+  }
+
+  private def showHistory(): Unit = {
+    println("Transition history")
+    val history = transitionHistory.map(_.name).mkString(" -> ")
+    println(history)
   }
 
   private def setState(state: State): Unit = {
