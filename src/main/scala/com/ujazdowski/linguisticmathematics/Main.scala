@@ -16,6 +16,15 @@ object Main extends App {
 
   private val data = loadFile("data.txt").head.head.split("#")
   data.foreach { input =>
+    val lenh = input.length
+    var index = 0
+    while (lenh > index) {
+      run(input.substring(index))
+      index = index + 1
+    }
+  }
+
+  private def run(input: String) : Unit = {
     println(input)
     startFSM(input)
     showHistory()
